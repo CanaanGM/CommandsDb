@@ -11,6 +11,6 @@ public class Command
     [Required]
     public string Platform { get; set; }
     [Required]
-    public string CommandLine { get; set; }
+    public string CommandLine { get; set; } 
 
 }
