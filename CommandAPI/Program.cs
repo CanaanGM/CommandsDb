@@ -1,5 +1,6 @@
 using CommandAPI.Data;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,12 +29,30 @@ var app = builder.Build();
 
 app.MapControllers();
 
-//// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
+
+if (app.Environment.IsDevelopment())
+{
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+}
+
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<CommandContext>();
+    await context.Database.MigrateAsync();
+
+}
+catch (Exception ex)
+{
+    // add logger lator
+    Console.WriteLine( ex );
+    //Environment.Exit( -1 );
+	
+}
 
 
 app.Run();
