@@ -7,11 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ICommandAPIRepo, CommandAPIRepo>();
 
-builder.Services.AddControllers()
-    //.AddJsonOptions(
-    //opt => opt.JsonSerializerOptions.Converters.Add(new Jsonconvert))
-    ;
+builder.Services.AddControllers();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 string posgres_user, posgress_password;
 posgres_user = builder.Configuration["POSGRES_USER"];
@@ -38,6 +36,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
+// Apply migrations Automatically ? ?
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
