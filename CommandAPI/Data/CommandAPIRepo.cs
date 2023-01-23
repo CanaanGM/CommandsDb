@@ -14,12 +14,16 @@ namespace CommandAPI.Data
 
         public void CreateCommand(Command command)
         {
-            throw new NotImplementedException();
+            if (command == null)
+                throw new ArgumentException(nameof(command));
+           _context.CommandItems.Add(command);
+
         }
 
         public void DeleteCommand(Command command)
         {
-            throw new NotImplementedException();
+            if (command == null) throw new ArgumentNullException(nameof(command));
+            _context.CommandItems.Remove(command);
         }
 
         public IEnumerable<Command> GetAllCommands()
@@ -39,14 +43,12 @@ namespace CommandAPI.Data
 
         }
 
-        public bool SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
+        public bool SaveChanges() => (_context.SaveChanges() >= 0);
 
         public void UpdateCommand(Command command)
         {
-            throw new NotImplementedException();
+           // No nedd as AUTMAPPER does the work \(@^0^@)/ ;
+           // when mapping happens the model in  the context is updated, we only need to call save changes to perssit it 
         }
     }
 }

@@ -3,11 +3,14 @@ using CommandAPI.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+using Newtonsoft.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ICommandAPIRepo, CommandAPIRepo>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(s=>s.SerializerSettings.ContractResolver= new CamelCasePropertyNamesContractResolver());
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
