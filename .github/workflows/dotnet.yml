@@ -26,7 +26,6 @@ jobs:
       working-directory: CommandAPI
       run: dotnet restore 
     - name: Build 
-      working-directory: CommandAPI
       run: dotnet build ./CommandAPI/CommandAPI.csproj --no-restore
     - name: Test
       working-directory: CommandAPI.Tests
