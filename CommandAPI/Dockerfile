@@ -7,8 +7,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["CommandAPI/CommandAPI.csproj", "CommandAPI/"]
-RUN dotnet restore "CommandAPI/CommandAPI.csproj"
+COPY ["CommandAPI.csproj", "CommandAPI/"]
+RUN dotnet restore "CommandAPI.csproj"
 COPY . .
 WORKDIR "/src/CommandAPI"
 RUN dotnet build "CommandAPI.csproj" -c Release -o /app/build
