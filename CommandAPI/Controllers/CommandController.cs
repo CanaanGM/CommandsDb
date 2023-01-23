@@ -22,7 +22,7 @@ namespace CommandAPI.Controllers
         }
 
         [HttpGet]
-        public async Task< ActionResult> GetAll()
+        public async Task<ActionResult> GetAll()
         {
             var commands = _repo.GetAllCommands();
 
@@ -31,7 +31,7 @@ namespace CommandAPI.Controllers
 
 
         [HttpGet("{id}", Name = "GetCommandById")]
-        public async Task<ActionResult> GetCommandById(int id)
+        public async Task<ActionResult<CommandReadDto>> GetCommandById(int id)
         {
             var command = _mapper.Map<CommandReadDto>( _repo.GetCommandById(id)) ;
             return command == null ? NotFound() : Ok(command);
