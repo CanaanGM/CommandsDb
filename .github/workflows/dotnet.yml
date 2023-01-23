@@ -23,8 +23,11 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Restore dependencies
+      working-directory: CommandAPI
       run: dotnet restore 
-    - name: Build ./CommandAPI/CommandAPI.csproj
+    - name: Build 
+      working-directory: CommandAPI
       run: dotnet build ./CommandAPI/CommandAPI.csproj --no-restore
     - name: Test
-      run: dotnet test ./CommandAPI.Tests/CommandAPI.Tests.csproj --no-build --verbosity normal
+      working-directory: CommandAPI.Tests
+      run: dotnet test --no-build --verbosity normal
